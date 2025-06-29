@@ -139,7 +139,8 @@ Apache2
 ---
 
 ## 📷 Tampilan Antarmuka
-
+<img src="./public/screenshoots/login.png" width="80%"/>
+<img src="./public/screenshoots/register.png" width="80%"/>
 <img src="./public/screenshoots/dashboard.png" width="80%"/>
 <img src="./public/screenshoots/list-pekerjaan.png" width="80%"/>
 <img src="./public/screenshoots/tambah-pekerjaan.png" width="80%"/>
