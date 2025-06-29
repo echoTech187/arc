@@ -140,14 +140,12 @@ Apache2
 
 ## 📷 Tampilan Antarmuka
 
-> *(Tambahkan screenshot di sini untuk memperlihatkan tampilan aplikasi)*
+<img src="./public/screenshoots/dashboard.png" width="80%"/>
+<img src="./public/screenshoots/list-pekerjaan.png" width="80%"/>
+<img src="./public/screenshoots/tambah-pekerjaan.png" width="80%"/>
+<img src="./public/screenshoots/list-pegawai.png" width="80%"/>
+<img src="./public/screenshoots/tambah-pegawai.png" width="80%"/>
 
-Contoh:
-
-```markdown
-![Dashboard Admin](https://github.com/echoTech187/arc/public/screenshoots/dashboard.png)
-![Form Input Pegawai](public/screenshoots/tambah-pegawai.png)
-```
 
 ---
 
