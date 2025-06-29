@@ -145,7 +145,7 @@ Apache2
 Contoh:
 
 ```markdown
-![Dashboard Admin](public/screenshoots/dashboard.png)
+![Dashboard Admin](https://github.com/echoTech187/arc/public/screenshoots/dashboard.png)
 ![Form Input Pegawai](public/screenshoots/tambah-pegawai.png)
 ```
 
