@@ -1,6 +1,7 @@
 "use client";
-import { getUser } from "@/app/actions/AuthAction";
+import { getUser, signOut } from "@/app/actions/AuthAction";
 import { getStatusCount } from "@/app/actions/DashboardAction";
+import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 interface User {
     name: string
@@ -11,6 +12,7 @@ const HeaderDashboard = () => {
     useEffect(() => {
         async function getUserData() {
             const user = await getUser();
+
             if (user) {
                 setUser(JSON.parse(user));
             }
@@ -18,9 +20,17 @@ const HeaderDashboard = () => {
         getUserData();
         async function getCountStatus() {
             const countStatus = await getStatusCount();
-            if (countStatus) {
-                setCountStatus(countStatus);
+            if (countStatus.responseCode == 401) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                await signOut();
+                redirect('/');
+            } else {
+                if (countStatus) {
+                    setCountStatus(countStatus);
+                }
             }
+
         }
         getCountStatus();
     }, []);

@@ -19,8 +19,7 @@ export async function signIn(email: string, password: string) {
 }
 export async function signOut() {
 
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+
     await removeCookies('token');
     await removeCookies('user');
     return true

@@ -8,18 +8,58 @@ import PostPerformanceCard from "./components/PostPerformanceCard"
 import StatsCard from "./components/StatsCard"
 import { getPerformance } from "../actions/DashboardAction";
 import { formatCurrency, formatNumber } from "@/utils/constant";
+import { checkAuth, getUser, removeCookies } from "../actions/AuthAction";
+import { useRouter } from "next/navigation";
 
 export const Dashboard = () => {
+    const router = useRouter();
     const [performance, setPerformance] = useState<any>([]);
     const [loading, setLoading] = useState(true);
+    const [userSession, setUserSession] = useState({});
 
     useEffect(() => {
         async function getDataPerformance() {
             const result = await getPerformance();
+
             setPerformance(result);
             setLoading(false);
+
+
         }
-        getDataPerformance();
+        function authCheck() {
+            return new Promise((resolve) => {
+                resolve(checkAuth());
+            });
+        }
+
+        authCheck().then(async (isAuthenticated) => {
+            if (isAuthenticated) {
+                const user = await getUser();
+                if (user) {
+                    setLoading(false);
+                    setUserSession(JSON.parse(user));
+                    getDataPerformance();
+                } else {
+                    setLoading(false);
+                    setUserSession({});
+                    window.localStorage.removeItem('token');
+                    window.localStorage.removeItem('user');
+                    await removeCookies('token');
+                    await removeCookies('user');
+                    router.push('/login');
+                }
+
+            } else {
+                setLoading(false);
+                setUserSession({});
+                window.localStorage.removeItem('token');
+                window.localStorage.removeItem('user');
+                await removeCookies('token');
+                await removeCookies('user');
+                router.push('/login');
+            }
+        }).finally(() => setLoading(false));
+
     }, []);
     if (loading) return (
         <div className="min-h-screen bg-gray-100">
