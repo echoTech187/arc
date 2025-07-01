@@ -20,11 +20,8 @@ export const Dashboard = () => {
     useEffect(() => {
         async function getDataPerformance() {
             const result = await getPerformance();
-
             setPerformance(result);
             setLoading(false);
-
-
         }
         function authCheck() {
             return new Promise((resolve) => {
