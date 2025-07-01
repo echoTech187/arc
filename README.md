@@ -76,13 +76,13 @@ Berikut adalah alur kerja data dari frontend ke backend:
 1. **Clone repositori:**
 
 ```bash
-git clone https://github.com/echoTech187/aplikasi-remunerasi-pegawai.git
+git clone https://github.com/echoTech187/arc.git
 ```
 
 2. **Buat database baru:**
 
 - Buka `phpMyAdmin`
-- Buat database misalnya `remunerasi_pegawai`
+- Buat database misalnya `arc_db`
 - Impor file `.sql` dari folder `/database`
 
 3. **Konfigurasi koneksi database:**
