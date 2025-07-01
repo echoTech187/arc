@@ -42,8 +42,9 @@ export default function EditJob() {
 
         async function getData() {
             const response = await detailJob(slug?.toString() ?? '');
-            const data = await response;
-            if (data.total > 0) {
+
+            const data = response;
+            if (data.responseStatus === true) {
                 setJob(data.data)
                 setEditorContent(data.data[0].description);
                 setJobAssignments(data.data[0].job_assignments);

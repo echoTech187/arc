@@ -29,7 +29,6 @@ export const JobPage = () => {
                 const user = await getUser();
                 if (user) {
                     const session = JSON.parse(user);
-                    console.log(session.role_id);
                     if (session.role_id === 1) {
                         setCanAdd(true);
                         setCanEdit(true);
@@ -259,7 +258,7 @@ export const JobPage = () => {
     return (
         <>
             <div className="w-full">
-                <DataTables column={columns} dataUri={api + '/job'} filterDataTemplate={filterDataTemplate} options={options} columnVisible={columnVisible} />
+                <DataTables column={columns} dataUri={api + '/task'} filterDataTemplate={filterDataTemplate} options={options} columnVisible={columnVisible} />
                 {isSidebarOpen && (
                     <JobDetailSidebar data={selectedData} onClose={handleCloseSidebar} />
                 )}

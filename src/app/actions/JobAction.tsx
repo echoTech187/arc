@@ -4,7 +4,7 @@ import { getToken } from "./AuthAction";
 export async function getJobs() {
     const api = process.env.NEXT_PUBLIC_API_URL;
     const token = await getToken();
-    const response = await fetch(api + '/job?limit=5&skip=0', {
+    const response = await fetch(api + '/task?limit=5&skip=0', {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + token,
@@ -21,7 +21,7 @@ export async function getJobs() {
 export async function getJob(id: string) {
     const api = process.env.NEXT_PUBLIC_API_URL;
     const token = await getToken();
-    const response = await fetch(api + '/jobs/' + id, {
+    const response = await fetch(api + '/task/' + id, {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + token,
@@ -66,7 +66,8 @@ export async function createJob(data: FormData) {
         job_assignment: job_assignment,
         jobDate: data.get('process_date'),
     };
-    const response = await fetch(api + '/job', {
+    console.log(postData);
+    const response = await fetch(api + '/task', {
         method: 'POST',
         mode: 'no-cors',
         headers: {
@@ -78,7 +79,6 @@ export async function createJob(data: FormData) {
         body: JSON.stringify(postData)
     });
     const result = await response.json();
-    console.log(result);
     return result;
 }
 
@@ -115,7 +115,7 @@ export async function updateJob(id: string, data: any) {
         job_assignment: job_assignment,
         jobDate: data.get('process_date'),
     };
-    const response = await fetch(api + '/job/' + id, {
+    const response = await fetch(api + '/task/' + id, {
         method: 'PATCH',
         headers: {
             'Authorization': 'Bearer ' + token,
@@ -132,7 +132,7 @@ export async function updateJob(id: string, data: any) {
 export async function deleteJob(id: string) {
     const api = process.env.NEXT_PUBLIC_API_URL;
     const token = await getToken();
-    const response = await fetch(api + '/job/' + id, {
+    const response = await fetch(api + '/task/' + id, {
         method: 'DELETE',
         headers: {
             'Authorization': 'Bearer ' + token,
@@ -149,7 +149,7 @@ export const detailJob = async (slug: String) => {
     try {
         const api = process.env.NEXT_PUBLIC_API_URL;
         const token = await getToken();
-        const res = await fetch(api + '/job/' + slug, {
+        const res = await fetch(api + '/task/' + slug, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -159,6 +159,7 @@ export const detailJob = async (slug: String) => {
             }
         });
         const result = await res.json();
+        console.log(result);
         return result;
     } catch (e) {
         return {

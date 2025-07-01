@@ -6,35 +6,34 @@ import { formatCurrency, formatNumber } from "@/utils/constant";
 const JobDetailSidebar = ({ data, onClose }) => {
     if (!data) return null;
     const VerticalTimeline = ({ events }) => {
-        console.log(events);
         return events.length === 0 ? <div className="relative">
-            <p className="text-sm text-gray-400 leading-relaxed text-center">No events found.</p></div> : (
-            <div className="relative pl-6"> {/* Padding kiri untuk garis dan titik */}
-                {/* Garis vertikal utama */}
-                <div className="absolute left-2 top-0 bottom-0 w-0.5 bg-gray-200"></div>
+            <p className="text-sm text-gray-400 leading-relaxed text-center">No events found.</p></div> : (<>
+                <div className="relative"><p className="text-base text-gray-400 leading-relaxed text-left mb-4">Event Timeline</p></div>
+                <div className="relative pl-2"> {/* Padding kiri untuk garis dan titik */}
+                    {/* Garis vertikal utama */}
+                    <div className="absolute left-2 top-0 bottom-0 w-0.5 bg-gray-200"></div>
 
-                {events.map((event, index) => (
-                    <div key={index} className="mb-8 relative">
-                        {/* Titik timeline */}
-                        <div className="absolute left-0 top-0 mt-1.5 w-4 h-4 rounded-full bg-indigo-600 border-2 border-white transform -translate-x-1/2"></div>
+                    {events.map((event, index) => (
+                        <div key={index} className="mb-4 relative">
+                            {/* Titik timeline */}
+                            <div className="absolute left-0 top-0 mt-0 w-4 h-4 rounded-full bg-orange-600 border-2 border-white transform -translate-x-1/2"></div>
 
-                        <div className="ml-6"> {/* Konten event di sebelah kanan titik */}
-                            <p className="text-xs font-semibold text-gray-500 uppercase">
-                                {event.type}
-                            </p>
-                            <p className="text-sm font-semibold text-indigo-600 mb-1">
-                                {event.date}
-                            </p>
-                            <h3 className="text-base font-bold text-gray-800 mb-2">
-                                {event.title}
-                            </h3>
-                            <p className="text-sm text-gray-700 leading-relaxed">
-                                {event.description}
-                            </p>
+                            <div className="ml-6"> {/* Konten event di sebelah kanan titik */}
+
+                                <p className="text-xs font-semibold text-indigo-600 mb-1">
+                                    {event.date}
+                                </p>
+                                <h3 className="text-xs font-bold text-gray-800 mb-2">
+                                    {event.title}
+                                </h3>
+                                <p className="text-xs text-gray-700 leading-relaxed">
+                                    {event.description}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
+            </>
         );
     };
     const getRemunerationTotal = () => {
@@ -42,7 +41,6 @@ const JobDetailSidebar = ({ data, onClose }) => {
         data.job_assignments.map((remuneration) => {
             total += parseInt(remuneration.calculated_remuneration);
         });
-        console.log(total);
         return formatCurrency(parseInt(total) + parseInt(data.additional_cost));
     }
     return (

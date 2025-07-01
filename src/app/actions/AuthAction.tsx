@@ -1,11 +1,12 @@
 "use server";
 import { cookies } from "next/headers";
+import { v7 as uuid } from 'uuid';
 
 export async function signIn(email: string, password: string) {
     const values = { email, password };
     const api = process.env.NEXT_PUBLIC_API_URL;
 
-    const response = await fetch(api + '/auth', {
+    const response = await fetch(api + '/auth/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -24,14 +25,28 @@ export async function signOut() {
     await removeCookies('user');
     return true
 }
-export async function signUp(email: string, password: string) {
-    return {
-        type: 'SIGN_UP',
-        payload: {
-            email,
-            password
-        }
+export async function signUp(email: string, password: string, username: string) {
+    const values = { email, password, username };
+    const api = process.env.NEXT_PUBLIC_API_URL;
+
+    const user = email.split('@')[0];
+    const postData = {
+        slug: uuid,
+        username: user,
+        name: values.username,
+        email: values.email,
+        password: values.password
     }
+    const response = await fetch(api + '/auth/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postData),
+    });
+
+    const result = await response.json();
+    return result;
 }
 
 export async function checkAuth() {
